@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Services\CoronaVirusService; 
 
 class SiteController extends Controller
 {
     public function Home()
     {
+        $teste = new CoronaVirusService();
+        dd($teste->AllCountries());
         return view('site.home');
     }
 
