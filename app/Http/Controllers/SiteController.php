@@ -10,7 +10,8 @@ class SiteController extends Controller
     public function Home()
     {
         $teste = new CoronaVirusService();
-        dd($teste->AllCountries());
+        // dd($teste->AllCountries());
+        dd($teste->DayOne('brazil'));
         return view('site.home');
     }
 
