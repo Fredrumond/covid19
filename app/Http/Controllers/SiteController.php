@@ -9,10 +9,13 @@ class SiteController extends Controller
 {
     public function Home()
     {
-        $teste = new CoronaVirusService();
+        $CoronaVirus = new CoronaVirusService();
+        $TotalCases = $CoronaVirus->ByCountryTotalStatus('brazil');
+        // dd($TotalCases);
         // dd($teste->AllCountries());
-        dd($teste->DayOne('brazil'));
-        return view('site.home');
+        // dd($teste->DayOne('brazil'));
+        // dd($teste->ByCountryTotalStatus('brazil'));
+        return view('site.home', compact('TotalCases'));
     }
 
     public function Register()

@@ -4,7 +4,7 @@
     <div class="highlights-header">
         <div>
             <h1>Casos no Brasil</h1>
-            <small>Atualizado em: 29/07/2020 19:30</small>
+            <small>Atualizado em: {{ $TotalCases->Date }}</small>
         </div>
         <div>
             <button class="button">Faça já seu registro</button>
@@ -13,19 +13,23 @@
     <div class="boxes">
         <div class="box warning">
             <div class="title">Casos ativos</div>
-            <div class="count">736473647</div>
+            <div class="count">{{ $TotalCases->Active }}</div>
+            <div class="count-news">+ {{ $TotalCases->LastActive }}</div>
         </div>
         <div class="box success">
             <div class="title">Casos recuperados</div>
-            <div class="count">736473647</div>
+            <div class="count">{{ $TotalCases->Recovered }}</div>
+            <div class="count-news">+ {{ $TotalCases->LastRecovered }}</div>
         </div>
         <div class="box info">
             <div class="title">Casos confirmados</div>
-            <div class="count">736473647</div>
+            <div class="count">{{ $TotalCases->Confirmed }}</div>
+            <div class="count-news">+ {{ $TotalCases->LastConfirmed }}</div>
         </div>
         <div class="box danger">
             <div class="title">Óbitos confirmados</div>
-            <div class="count">736473647</div>
+            <div class="count">{{ $TotalCases->Deaths }}</div>
+            <div class="count-news">+ {{ $TotalCases->LastDeaths }}</div>
         </div>
     </div>
 </div>
