@@ -81,7 +81,7 @@ class CoronaVirusService
         $AllStatusToday->LastDeaths = number_format($AllStatus->Deaths - $AllStatusLast->Deaths,0,".",".");
         $AllStatusToday->LastRecovered = number_format($AllStatus->Recovered - $AllStatusLast->Recovered,0,".",".");
         $AllStatusToday->LastActive = number_format($AllStatus->Active - $AllStatusLast->Active,0,".",".");
-        $AllStatusToday->Date = $AllStatus->Date;
+        $AllStatusToday->Date = date("d/m/Y", strtotime($AllStatus->Date));
 
         return $AllStatusToday;
     }
