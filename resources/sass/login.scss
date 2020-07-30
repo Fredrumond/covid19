@@ -1,0 +1,150 @@
+@import 'variables';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  text-rendering: geometricPrecision;
+}
+
+img {
+  max-width: 100%;
+}
+img a {
+  border: none;
+}
+
+ul {
+  list-style: none;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+
+/** CONFIG */
+html, body {
+  min-height: 100vh;
+}
+
+/** SCREEN */
+.login {
+  display: flex;
+  flex-wrap: nowrap;
+  min-height: 100vh;
+}
+
+/** LEFT */
+.login-left {
+  flex-basis: 40%;
+  background: $primary-color;
+  color: $color-white;
+  background-size: cover;
+  padding: 30px 0;
+  box-shadow: 3px 0px 10px 5px #CCC;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.login-left-box {
+  background: $primary-color;
+  width: 500px;
+  max-width: 90%;
+  margin: auto;
+  padding: 30px;
+  align-items: center;
+
+  .login-box-headline h1 {
+    font-size: 2em;
+    text-align: center;
+  }
+
+  form {
+    display: block;
+    margin: 30px 0;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 30px;
+  }
+
+  label .field {
+    font-size: 0.875em;
+    display: block;
+    font-weight: bold;
+  }
+
+  input {
+    border: none;
+    border-bottom: 1px solid $color-white;
+    font-size: 1em;
+    background: $primary-color !important;
+    color: $color-white;
+    outline: none;
+    display: block;
+    width: 100%;
+    padding: 10px 0;
+    margin-top: 4px;
+    font-weight: 300;
+  }
+
+  input::placeholder {
+    color: $color-white;
+  }
+
+  button {
+    font-size: 0.875em;
+    display: block;
+    cursor: pointer;
+    width: 100%;
+    padding: 15px;
+    border: none;
+    color: $color-white;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-shadow: 1px 1px rgba(0, 0, 0, 0.5);
+    background: #3F3D56;
+  }
+
+  footer {
+    font-size: 0.8em;
+    text-align: center;
+    font-weight: 300;
+
+    a {
+      color: $color-white;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    p {
+      margin: 0px;
+
+      &.login-left-box-support {
+        margin-top: 10px;
+
+        a {
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}
+
+/** RIGHT */
+.login_right {
+  flex-basis: 60%;
+  padding: 30px 0;
+  background-size: 60%;
+}

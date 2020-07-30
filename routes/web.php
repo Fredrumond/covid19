@@ -1,5 +1,5 @@
 <?php
 
-Route::get('/', function () {
-    return view('site.home');
-});
+Route::get('/','SiteController@Home');
+Route::get('/entrar','SiteController@Login');
+Route::get('/registro','SiteController@Register');

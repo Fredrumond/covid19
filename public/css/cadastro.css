@@ -1,0 +1,166 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  text-rendering: geometricPrecision;
+}
+
+img {
+  max-width: 100%;
+}
+
+img a {
+  border: none;
+}
+
+ul {
+  list-style: none;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+/** CONFIG */
+
+html,
+body {
+  min-height: 100vh;
+}
+
+/** SCREEN */
+
+.cadastro {
+  display: flex;
+  flex-wrap: nowrap;
+  min-height: 100vh;
+}
+
+/** LEFT */
+
+.cadastro-left {
+  flex-basis: 40%;
+  background: #266989;
+  color: #FFFFFF;
+  background-size: cover;
+  padding: 30px 0;
+  box-shadow: 3px 0px 10px 5px #CCC;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.cadastro-left-box {
+  background: #266989;
+  width: 500px;
+  max-width: 90%;
+  margin: auto;
+  padding: 30px;
+  align-items: center;
+}
+
+.cadastro-left-box .cadastro-box-headline h1 {
+  font-size: 2em;
+  text-align: center;
+}
+
+.cadastro-left-box form {
+  display: block;
+  margin: 30px 0;
+}
+
+.cadastro-left-box label {
+  display: block;
+  margin-bottom: 30px;
+}
+
+.cadastro-left-box label .field {
+  font-size: 0.875em;
+  display: block;
+  font-weight: bold;
+}
+
+.cadastro-left-box input {
+  border: none;
+  border-bottom: 1px solid #FFFFFF;
+  font-size: 1em;
+  background: #266989 !important;
+  color: #FFFFFF;
+  outline: none;
+  display: block;
+  width: 100%;
+  padding: 10px 0;
+  margin-top: 4px;
+  font-weight: 300;
+}
+
+.cadastro-left-box input::-moz-placeholder {
+  color: #FFFFFF;
+}
+
+.cadastro-left-box input:-ms-input-placeholder {
+  color: #FFFFFF;
+}
+
+.cadastro-left-box input::-ms-input-placeholder {
+  color: #FFFFFF;
+}
+
+.cadastro-left-box input::placeholder {
+  color: #FFFFFF;
+}
+
+.cadastro-left-box button {
+  font-size: 0.875em;
+  display: block;
+  cursor: pointer;
+  width: 100%;
+  padding: 15px;
+  border: none;
+  color: #FFFFFF;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.5);
+  background: #3F3D56;
+}
+
+.cadastro-left-box footer {
+  font-size: 0.8em;
+  text-align: center;
+  font-weight: 300;
+}
+
+.cadastro-left-box footer a {
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+.cadastro-left-box footer a:hover {
+  text-decoration: underline;
+}
+
+.cadastro-left-box footer p {
+  margin: 0px;
+}
+
+.cadastro-left-box footer p.cadastro-left-box-support {
+  margin-top: 10px;
+}
+
+.cadastro-left-box footer p.cadastro-left-box-support a {
+  text-decoration: none;
+}
+
+/** RIGHT */
+
+.cadastro_right {
+  flex-basis: 60%;
+  padding: 30px 0;
+  background-size: 60%;
+}
+

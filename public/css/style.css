@@ -50,7 +50,7 @@ body {
 .button {
   width: 100%;
   height: 40px;
-  color: #fff;
+  color: #FFFFFF;
   font-weight: bold;
   text-transform: uppercase;
   background-color: #266989;
@@ -61,7 +61,7 @@ body {
 }
 
 .menu {
-  background: #fff;
+  background: #FFFFFF;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -71,7 +71,7 @@ body {
 }
 
 .menu .logo {
-  color: #fff;
+  color: #FFFFFF;
 }
 
 .menu .logo h1 {
@@ -152,7 +152,7 @@ body {
 }
 
 .footer {
-  background: #fff;
+  background: #FFFFFF;
   display: flex;
   align-items: center;
   justify-content: center;

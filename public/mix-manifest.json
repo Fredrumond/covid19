@@ -1,3 +1,5 @@
 {
-    "/css/style.css": "/css/style.css"
+    "/css/style.css": "/css/style.css",
+    "/css/login.css": "/css/login.css",
+    "/css/cadastro.css": "/css/cadastro.css"
 }
