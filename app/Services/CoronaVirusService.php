@@ -43,7 +43,7 @@ class CoronaVirusService
         $LastDateCases = date('Y-m-d', strtotime($DateNow . ' -2 day'));
         $Date = $LastDate . 'T00:00:00Z';
         $DateLastCases = $LastDateCases . 'T00:00:00Z';
-
+        
         $EndPoint = 'country/' . $Country;
 
         $Response = self::MakeRequest($EndPoint);
@@ -72,7 +72,7 @@ class CoronaVirusService
                 $AllStatusLast->Date = $Res['Date'];
             }
         }
-
+       
         $AllStatusToday->Confirmed = number_format($AllStatus->Confirmed,0,".",".");
         $AllStatusToday->Deaths = number_format($AllStatus->Deaths,0,".",".");
         $AllStatusToday->Recovered = number_format($AllStatus->Recovered,0,".",".");

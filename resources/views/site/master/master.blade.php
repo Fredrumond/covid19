@@ -15,7 +15,7 @@
         <div class="navigation">
             <ul>
                 <li>
-                    <a href="#" class="button">
+                    <a href="{{ route('login') }}" class="button">
                         Entrar
                     </a>
                 </li>

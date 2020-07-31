@@ -7,7 +7,7 @@
             <small>Atualizado em: {{ $TotalCases->Date }}</small>
         </div>
         <div>
-            <button class="button">Faça já seu registro</button>
+            <a class="button" href="{{ route('register') }}" >Faça já seu registro</a>
         </div>
     </div>
     <div class="boxes">
@@ -29,7 +29,7 @@
         <div class="box danger">
             <div class="title">Óbitos confirmados</div>
             <div class="count">{{ $TotalCases->Deaths }}</div>
-            <div class="count-news">+ {{ $TotalCases->LastDeaths }}</div>
+            <div class="count-news">+{{ $TotalCases->LastDeaths }}</div>
         </div>
     </div>
 </div>
