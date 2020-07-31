@@ -7,6 +7,14 @@
         <small>Últimos 15 dias</small>
     </div>
     <div class="actions">
+        <select class="select-days">
+        <option value=""></option>
+        <option value="10">10 Dias</option>
+        <option value="15">15 Dias</option>
+        <option value="20">20 Dias</option>
+        <option value="25">25 Dias</option>
+        <option value="30">30 Dias</option>
+        </select>
         <select class="select-country">
             @foreach($Countries as $Country)
                 <option value="{{ $Country['Slug'] }}"> {{ $Country['Country'] }} </option>
@@ -36,12 +44,26 @@
 
 $(".btn-filter").click(function() {
     let Country = $('.select-country').val()
-    HttpRequest(Country)
+    let Days = $('.select-days').val()
+
+    if(Days == ''){
+        HttpRequest(Country)
+    }
+    
+    HttpRequest(Country, Days)
 });
 
-function HttpRequest(Country){
+function HttpRequest(Country, Days = null){
+    let url = ''
+
+    if(Days){
+        url = `/details-coutry/${Country}/${Days}`
+    } else {
+        url = `/details-coutry/${Country}`
+    }
+    
     $.ajax({
-        url: `/details-coutry/${Country}`,
+        url: url,
         type: 'GET',
         dataType: 'json'
     })
@@ -52,13 +74,11 @@ function HttpRequest(Country){
         let RecoveredCases = [];
         let ActiveCases = [];
         response.map(day => {
-            if(day.Date >= '2020-07-01T00:00:00Z' && day.Date <= '2020-07-15T00:00:00Z'){
-                Data.push(day.Date)
-                ConfirmedCases.push(day.Confirmed)
-                DeathsCases.push(day.Deaths)
-                RecoveredCases.push(day.Recovered)
-                ActiveCases.push(day.Active)
-            }
+            Data.push(day.Date)
+            ConfirmedCases.push(day.Confirmed)
+            DeathsCases.push(day.Deaths)
+            RecoveredCases.push(day.Recovered)
+            ActiveCases.push(day.Active)
         })
 
         CreatChart({

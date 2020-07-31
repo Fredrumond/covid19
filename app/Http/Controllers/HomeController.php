@@ -30,10 +30,11 @@ class HomeController extends Controller
         return view('home', compact('Countries'));
     }
 
-    public function ShowDetailsCountrie($Country)
+    public function ShowDetailsCountrie($Country,$Days = null)
     {
+        
         $CoronaVirus = new CoronaVirusService();
-        $Details = $CoronaVirus->TotalDayOne($Country);
+        $Details = $CoronaVirus->TotalLastDays($Country, ($Days) ? $Days : null);
 
         return response()->json($Details,200);
     }

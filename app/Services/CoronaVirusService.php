@@ -36,10 +36,32 @@ class CoronaVirusService
         return self::MakeRequest($EndPoint);
     }
     
-    public function TotalDayOne($Country)
+    public function TotalLastDays($Country, $Days)
     {
+        
         $EndPoint = 'total/dayone/country/' . $Country;
-        return self::MakeRequest($EndPoint);
+        $Response = self::MakeRequest($EndPoint);
+
+        if($Days)
+        {
+            $LastRegister = $Response[count($Response) - 1];
+            
+            $LastDate = date('Y-m-d', strtotime($LastRegister['Date'] . ' -' . $Days . 'day')) . 'T00:00:00Z';
+            
+            $Registers = [];
+
+            foreach($Response as $Res)
+            {
+                if($Res['Date'] >= $LastDate)
+                {
+                    array_push($Registers, $Res);
+                }
+            }
+            
+            return $Registers;
+        }
+
+        return $Response;
     }
     
     public function ByCountryTotalStatus($Country)
