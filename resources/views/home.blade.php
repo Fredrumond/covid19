@@ -1,13 +1,23 @@
 @extends('admin.master')
 
 @section('content')
-<figure class="highcharts-figure">
+<div class="chart-grid">
+    <div id="confirmed-chart"></div>
+    <div id="deaths-chart"></div>
+</div>
+<div class="chart-grid">
+    <div id="recovered-chart"></div>
+    <div id="active-chart"></div>
+</div>
+
+<!-- <figure class="highcharts-figure">
     <div id="container"></div>
-</figure>
+</figure> -->
 @endsection
 @section('script')
 <script src="https://code.highcharts.com/highcharts.js"></script>
-<script src="https://code.highcharts.com/modules/series-label.js"></scrip
+<script src="https://code.highcharts.com/modules/coloraxis.js"></script>
+<script src="https://code.highcharts.com/modules/series-label.js"></script>
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
@@ -28,30 +38,85 @@ $.ajax({
     let RecoveredCases = [];
     let ActiveCases = [];
     response.map(day => {
-        if(day.Date >= '2020-07-01T00:00:00Z'){
+        if(day.Date >= '2020-07-01T00:00:00Z' && day.Date <= '2020-07-15T00:00:00Z'){
             Data.push(day.Date)
             ConfirmedCases.push(day.Confirmed)
             DeathsCases.push(day.Deaths)
             RecoveredCases.push(day.Recovered)
             ActiveCases.push(day.Active)
         }
-        
-        // console.log(day.Date)
-    })  
-    
-    Highcharts.chart('container', {
+    })
+
+    CreatChart({
+        reference: 'confirmed-chart',
+        chartConfig: {
+            title: 'Numero de confirmados',
+            yLegend: 'Casos',
+            xCategories: Data,
+            serie: 'Confirmados',
+            data: ConfirmedCases,
+            color: '#cce5ff'
+        }
+    });
+
+    CreatChart({
+        reference: 'deaths-chart',
+        chartConfig: {
+            title: 'Numero de óbitos',
+            yLegend: 'Casos',
+            xCategories: Data,
+            serie: 'Óbitos',
+            data: DeathsCases,
+            color: '#f8d7da'
+        }
+    });
+
+    CreatChart({
+        reference: 'recovered-chart',
+        chartConfig: {
+            title: 'Numero de casos recuperados',
+            yLegend: 'Casos',
+            xCategories: Data,
+            serie: 'Recuperados',
+            data: RecoveredCases,
+            color: '#d4edda'
+        }
+    });
+
+    CreatChart({
+        reference: 'active-chart',
+        chartConfig: {
+            title: 'Numero de casos ativos',
+            yLegend: 'Casos',
+            xCategories: Data,
+            serie: 'Ativos',
+            data: ActiveCases,
+            color: '#fff3cd'
+        }
+    });
+})
+.fail(function(error) {
+    console.log('Foi encontrado um erro durante a execução. Entre em contato com a equipe de desenvolvimento!');
+    console.log(error);
+})
+
+function CreatChart(config){
+    const { reference, chartConfig } = config;
+
+    Highcharts.chart(reference, {
         chart: {
-            type: 'line'
+            type: 'line',
+            width: 700
         },
         title: {
-            text: 'Numero de casos'
+            text: chartConfig.title
         },
         xAxis: {
-            categories: Data
+            categories: chartConfig.xCategories
         },
         yAxis: {
             title: {
-                text: 'Casos'
+                text: chartConfig.yLegend
             }
         },
         plotOptions: {
@@ -64,35 +129,27 @@ $.ajax({
         },
         series: [
             {
-                name: 'Confirmados',
-                data: ConfirmedCases
-             },
-             {
-                name: 'Mortes',
-                data: DeathsCases
-             },
-             {
-                name: 'Recuperados',
-                data: RecoveredCases
-             },
-             {
-                name: 'Ativos',
-                data: ActiveCases
+                name: chartConfig.serie,
+                data: chartConfig.data,
+                color: chartConfig.color
              }
-    ]
+        ],
+        responsive: {
+        rules: [{
+            condition: {
+                maxWidth: 500
+            },
+            chartOptions: {
+                legend: {
+                    layout: 'horizontal',
+                    align: 'center',
+                    verticalAlign: 'bottom'
+                }
+            }
+        }]
+    }
     });
-
-
-//    console.log(response); 
-// console.log(testeData)            
-})
-.fail(function(error) {
-    console.log('Foi encontrado um erro durante a execução. Entre em contato com a equipe de desenvolvimento!');
-    console.log(error);
-})
-
-
-
+}
 </script>
 @endsection
 
