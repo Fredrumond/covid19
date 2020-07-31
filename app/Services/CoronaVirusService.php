@@ -36,6 +36,12 @@ class CoronaVirusService
         return self::MakeRequest($EndPoint);
     }
     
+    public function TotalDayOne($Country)
+    {
+        $EndPoint = 'total/dayone/country/' . $Country;
+        return self::MakeRequest($EndPoint);
+    }
+    
     public function ByCountryTotalStatus($Country)
     {
         $DateNow = date("Y/m/d");

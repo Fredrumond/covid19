@@ -83,3 +83,19 @@ body {
   gap: 2px;
 }
 
+.filter {
+  display: flex;
+  background: #FFFFFF;
+  padding: 20px;
+  margin-bottom: 10px;
+  flex-direction: column;
+}
+
+.filter .title {
+  margin-bottom: 20px;
+}
+
+.filter .actions .button {
+  padding: 5px;
+}
+

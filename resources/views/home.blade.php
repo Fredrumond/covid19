@@ -1,6 +1,20 @@
 @extends('admin.master')
 
 @section('content')
+<div class="filter">
+    <div class="title">
+        <h1>Realize aqui sua pesquisa por país</h1>
+        <small>Últimos 15 dias</small>
+    </div>
+    <div class="actions">
+        <select class="select-country">
+            @foreach($Countries as $Country)
+                <option value="{{ $Country['Slug'] }}"> {{ $Country['Country'] }} </option>
+            @endforeach
+        </select>
+        <button class="btn-filter" href="#" >Filtrar</button>
+    </div>
+</div>
 <div class="chart-grid">
     <div id="confirmed-chart"></div>
     <div id="deaths-chart"></div>
@@ -9,10 +23,6 @@
     <div id="recovered-chart"></div>
     <div id="active-chart"></div>
 </div>
-
-<!-- <figure class="highcharts-figure">
-    <div id="container"></div>
-</figure> -->
 @endsection
 @section('script')
 <script src="https://code.highcharts.com/highcharts.js"></script>
@@ -24,81 +34,86 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 
+$(".btn-filter").click(function() {
+    let Country = $('.select-country').val()
+    HttpRequest(Country)
+});
 
-
-$.ajax({
-    url: 'https://api.covid19api.com/total/dayone/country/brazil',
-    type: 'GET',
-    dataType: 'json'
-})
-.done(function(response) { 
-    let Data = [];
-    let ConfirmedCases = [];
-    let DeathsCases = [];
-    let RecoveredCases = [];
-    let ActiveCases = [];
-    response.map(day => {
-        if(day.Date >= '2020-07-01T00:00:00Z' && day.Date <= '2020-07-15T00:00:00Z'){
-            Data.push(day.Date)
-            ConfirmedCases.push(day.Confirmed)
-            DeathsCases.push(day.Deaths)
-            RecoveredCases.push(day.Recovered)
-            ActiveCases.push(day.Active)
-        }
+function HttpRequest(Country){
+    $.ajax({
+        url: `/details-coutry/${Country}`,
+        type: 'GET',
+        dataType: 'json'
     })
+    .done(function(response) { 
+        let Data = [];
+        let ConfirmedCases = [];
+        let DeathsCases = [];
+        let RecoveredCases = [];
+        let ActiveCases = [];
+        response.map(day => {
+            if(day.Date >= '2020-07-01T00:00:00Z' && day.Date <= '2020-07-15T00:00:00Z'){
+                Data.push(day.Date)
+                ConfirmedCases.push(day.Confirmed)
+                DeathsCases.push(day.Deaths)
+                RecoveredCases.push(day.Recovered)
+                ActiveCases.push(day.Active)
+            }
+        })
 
-    CreatChart({
-        reference: 'confirmed-chart',
-        chartConfig: {
-            title: 'Numero de confirmados',
-            yLegend: 'Casos',
-            xCategories: Data,
-            serie: 'Confirmados',
-            data: ConfirmedCases,
-            color: '#cce5ff'
-        }
-    });
+        CreatChart({
+            reference: 'confirmed-chart',
+            chartConfig: {
+                title: 'Numero de confirmados',
+                yLegend: 'Casos',
+                xCategories: Data,
+                serie: 'Confirmados',
+                data: ConfirmedCases,
+                color: '#cce5ff'
+            }
+        });
 
-    CreatChart({
-        reference: 'deaths-chart',
-        chartConfig: {
-            title: 'Numero de óbitos',
-            yLegend: 'Casos',
-            xCategories: Data,
-            serie: 'Óbitos',
-            data: DeathsCases,
-            color: '#f8d7da'
-        }
-    });
+        CreatChart({
+            reference: 'deaths-chart',
+            chartConfig: {
+                title: 'Numero de óbitos',
+                yLegend: 'Casos',
+                xCategories: Data,
+                serie: 'Óbitos',
+                data: DeathsCases,
+                color: '#f8d7da'
+            }
+        });
 
-    CreatChart({
-        reference: 'recovered-chart',
-        chartConfig: {
-            title: 'Numero de casos recuperados',
-            yLegend: 'Casos',
-            xCategories: Data,
-            serie: 'Recuperados',
-            data: RecoveredCases,
-            color: '#d4edda'
-        }
-    });
+        CreatChart({
+            reference: 'recovered-chart',
+            chartConfig: {
+                title: 'Numero de casos recuperados',
+                yLegend: 'Casos',
+                xCategories: Data,
+                serie: 'Recuperados',
+                data: RecoveredCases,
+                color: '#d4edda'
+            }
+        });
 
-    CreatChart({
-        reference: 'active-chart',
-        chartConfig: {
-            title: 'Numero de casos ativos',
-            yLegend: 'Casos',
-            xCategories: Data,
-            serie: 'Ativos',
-            data: ActiveCases,
-            color: '#fff3cd'
-        }
-    });
-})
-.fail(function(error) {
-    console.log('Foi encontrado um erro durante a execução. Entre em contato com a equipe de desenvolvimento!');
-    console.log(error);
-})
+        CreatChart({
+            reference: 'active-chart',
+            chartConfig: {
+                title: 'Numero de casos ativos',
+                yLegend: 'Casos',
+                xCategories: Data,
+                serie: 'Ativos',
+                data: ActiveCases,
+                color: '#fff3cd'
+            }
+        });
+    })
+    .fail(function(error) {
+        console.log('Foi encontrado um erro durante a execução. Entre em contato com a equipe de desenvolvimento!');
+    })
+}
+
 
 function CreatChart(config){
     const { reference, chartConfig } = config;

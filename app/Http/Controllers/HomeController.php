@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Services\CoronaVirusService; 
 
 class HomeController extends Controller
 {
@@ -21,8 +22,19 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function Index()
     {
-        return view('home');
+        $CoronaVirus = new CoronaVirusService();
+        $Countries = $CoronaVirus->AllCountries();
+
+        return view('home', compact('Countries'));
+    }
+
+    public function ShowDetailsCountrie($Country)
+    {
+        $CoronaVirus = new CoronaVirusService();
+        $Details = $CoronaVirus->TotalDayOne($Country);
+
+        return response()->json($Details,200);
     }
 }

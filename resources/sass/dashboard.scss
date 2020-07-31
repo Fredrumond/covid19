@@ -85,3 +85,21 @@ body {
     grid-template-columns: repeat(2, 1fr);
     gap: 2px;
 }
+
+.filter {
+  display: flex;
+  background: $color-white;
+  padding: 20px;
+  margin-bottom: 10px;
+  flex-direction: column;
+
+  .title {
+    margin-bottom: 20px;
+  }
+
+  .actions {
+    .button {
+      padding: 5px;
+    }
+  }
+}
